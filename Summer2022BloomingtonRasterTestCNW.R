@@ -2,6 +2,18 @@ library(raster)
 library(sp)
 library(rgdal)
 
+#Okay I guess I messed up the first time I tried to comment. Woops
+#also this is how you comment in stuff! It can be really helpful later on so you can make notes to yourself and to others
+
+#I don't see your data at all so please upload your data files to the folder I created here called "Data"
+#then you can call your files directly from github like this:
+
+#Btown <- raster("Data/SMAP_L3_SM_P_20200501_R18290_002.tif") 
+
+#This way, other people can run your code and you wont have to work from your local drive anymore
+#this can be really helpful if youre working from multiple computers
+
+
 WD <- "C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif"
 setwd("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster")
 
