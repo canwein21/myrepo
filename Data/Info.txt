@@ -1,1 +1,3 @@
 Upload your data to this folder (or any folder to access them directly in your R project!)
+
+You can also use this for notes on your data if you wanted to. 
