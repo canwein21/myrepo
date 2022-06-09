@@ -1,6 +1,8 @@
 library(raster)
 library(sp)
 library(rgdal)
+library(maptools)
+library(rgeos)
 
 #Okay I guess I messed up the first time I tried to comment. Woops
 #also this is how you comment in stuff! It can be really helpful later on so you can make notes to yourself and to others
@@ -12,13 +14,44 @@ library(rgdal)
 
 #This way, other people can run your code and you wont have to work from your local drive anymore
 #this can be really helpful if youre working from multiple computers
-
+#Trying to make sure R and GitHub are now connected?
 
 WD <- "C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif"
 setwd("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster")
 
 Btown <- raster("C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif") 
 Btown
+
+#Defining Min/Max values
+Btown <- setMinMax(Btown)
+Btown
+cellStats(Btown, min)
+#Need to figure out why this is giving me "In min(x, na.rm = na.rm) : no non-missing arguments to min; returning Inf". For max, it's giving me "-Inf."
+cellStats(Btown, max)
+cellStats(Btown, range)
+
+#Coordinate reference system
+Btown@crs
+Btown@extent
+str(Btown)
+BTown <- stack("C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif")
+names(BTown) <- paste0("L", seq(1:nlayers(BTown)))
+class(BTown)
+#Values for "i,j" - Not sure I need these or what they do, but a StackOverflow tutorial has them. Will try and figure them out.
+i=100
+j=100
+Btown[i,j]
+#Values for i,j & z at layers 1, 5, 10.
+z=c(1,5,10)
+Btown[i,j][z]
+#Computing sum by year
+NewLayer <- calc(brick(BTown), fun=sum)
+plot(NewLayer)
+extent(Btown)
+
+#Creating SPDF
+Btown <- SpatialPointsDataFrame(Btown[,4:3], proj4string = Btown@crs, Btown)
+sp <- SpatialPoints(v[,1:2, drop = FALSE], proj4string = crs(Btown))
 
 plot(Btown, main = "Bloomington, Indiana area generally")
 
@@ -31,6 +64,7 @@ par(xpd = TRUE)
 legend(par()$usr[2], 4713700, legend = c("I don't know why this is blank"), fill = rev(col))
 
 crs(Btown)
+Btown@crs
 
 myBtown <- crs(Btown)
 myBtown
@@ -56,12 +90,20 @@ par(col.axis = "white", col.lab = "white", tck = 0)
 plotRGB(newRGBImage, r = 1, g = 2, b = 3, axes = TRUE, main = "= NA")
 
 par(col.axis = "black", col.lab = "black", tck = 0)
-hist(DSM_HARV, main = "", xlab = "", ylab = "", col = "wheat")
 
 ncell(Btown)
+ncol(Btown)
+nrow(Btown)
+set.seed(123)
+Bloomington <- raster(ncol=960, nrow=400)
+Bloomington_list <- list()
+for(i in 1:960){
+  Bloomington_list[[i]] <- setValues(Bloomington, Bloomingtonnorm(ncell(Btown), mean = 100, sd = 50))
+}
 
-hist(Btown, maxpixels = ncell(Btown), main = "", xlab = "", ylab = "", col = "blue")
+hist(Btown, maxpixels = ncell(Btown), main = "Bloomington, IN distribution of values", col = "blue")
 
 nlayers(Btown)
 
 GDALinfo("C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif")
+
