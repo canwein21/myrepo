@@ -47,7 +47,19 @@ Btown[i,j][z]
 #Computing sum by year
 NewLayer <- calc(brick(BTown), fun=sum)
 plot(NewLayer)
+#Working on the extent of the raster
 extent(Btown)
+newextent <- extent(0,900,0,350)
+class(newextent)
+Btown <- crop(x = Btown, y = newextent)
+plot(Btown, main = "Manually cropped raster\nBloomington, Indiana")
+plot(newextent, col="blue3", lwd = 4, add = TRUE)
+plot(Btown, main = "Manually Cropped Raster of Bloomington, IN", add = TRUE)
+
+#Extracting raster pixel values using vector polygons
+nlayers(Btown)
+#Looks like I can't summarize the data as shown by NEON's tutorial because the "Btown" raster is 1 layer
+values(Btown)
 
 #Creating SPDF
 Btown <- SpatialPointsDataFrame(Btown[,4:3], proj4string = Btown@crs, Btown)
