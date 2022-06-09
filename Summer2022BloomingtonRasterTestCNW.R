@@ -60,6 +60,9 @@ plot(Btown, main = "Manually Cropped Raster of Bloomington, IN", add = TRUE)
 nlayers(Btown)
 #Looks like I can't summarize the data as shown by NEON's tutorial because the "Btown" raster is 1 layer
 values(Btown)
+as.data.frame(Btown, xy = TRUE)
+BloomingtonIN <- brick("C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif")
+BloomingtonIN
 
 #Creating SPDF
 Btown <- SpatialPointsDataFrame(Btown[,4:3], proj4string = Btown@crs, Btown)
