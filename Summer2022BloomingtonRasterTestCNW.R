@@ -63,6 +63,8 @@ values(Btown)
 as.data.frame(Btown, xy = TRUE)
 BloomingtonIN <- brick("C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif")
 BloomingtonIN
+#I used the S4 method for signature 'Raster,matrix.' Not sure if this was the right one to use, and not sure why all my values per entry all ready "NA."
+extract(Btown, newextent, method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, fun=NULL, na.rm=TRUE, layer, nl, df=FALSE, factors=FALSE)
 
 #Creating SPDF
 Btown <- SpatialPointsDataFrame(Btown[,4:3], proj4string = Btown@crs, Btown)
