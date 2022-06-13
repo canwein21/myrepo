@@ -16,10 +16,10 @@ library(rgeos)
 #this can be really helpful if youre working from multiple computers
 #Trying to make sure R and GitHub are now connected?
 
-WD <- "C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif"
-setwd("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster")
+WD <- "C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/BloomingtonIN.tif"
+setwd("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/")
 
-Btown <- raster("C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif") 
+Btown <- raster("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/BloomingtonIN.tif") 
 Btown
 
 #Defining Min/Max values
@@ -27,6 +27,7 @@ Btown <- setMinMax(Btown)
 Btown
 cellStats(Btown, min)
 #Need to figure out why this is giving me "In min(x, na.rm = na.rm) : no non-missing arguments to min; returning Inf". For max, it's giving me "-Inf."
+#Looking at other people's code on Stack Overflow, there shouldn't be an error.
 cellStats(Btown, max)
 cellStats(Btown, range)
 
@@ -34,19 +35,13 @@ cellStats(Btown, range)
 Btown@crs
 Btown@extent
 str(Btown)
-BTown <- stack("C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif")
+BTown <- stack("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/BloomingtonIN.tif")
+BTown
 names(BTown) <- paste0("L", seq(1:nlayers(BTown)))
 class(BTown)
-#Values for "i,j" - Not sure I need these or what they do, but a StackOverflow tutorial has them. Will try and figure them out.
-i=100
-j=100
-Btown[i,j]
-#Values for i,j & z at layers 1, 5, 10.
-z=c(1,5,10)
-Btown[i,j][z]
 #Computing sum by year
 NewLayer <- calc(brick(BTown), fun=sum)
-plot(NewLayer)
+plot(NewLayer, main = "New Layer", col = blue)
 #Working on the extent of the raster
 extent(Btown)
 newextent <- extent(0,900,0,350)
@@ -61,7 +56,7 @@ nlayers(Btown)
 #Looks like I can't summarize the data as shown by NEON's tutorial because the "Btown" raster is 1 layer
 values(Btown)
 as.data.frame(Btown, xy = TRUE)
-BloomingtonIN <- brick("C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif")
+BloomingtonIN <- brick("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/BloomingtonIN.tif")
 BloomingtonIN
 #I used the S4 method for signature 'Raster,matrix.' Not sure if this was the right one to use, and not sure why all my values per entry all ready "NA."
 extract(Btown, newextent, method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, fun=NULL, na.rm=TRUE, layer, nl, df=FALSE, factors=FALSE)
@@ -108,6 +103,7 @@ RGB_stackNEW
 func <- function(x) {
   x[rowSums(x == 0) == 3, ] <- NA
   x}
+func
 
 newRGBImage <- calc(RGB_stack, func)
 
@@ -132,5 +128,5 @@ hist(Btown, maxpixels = ncell(Btown), main = "Bloomington, IN distribution of va
 
 nlayers(Btown)
 
-GDALinfo("C:/Users/User/OneDrive/Desktop/Research Assistant/SMAP_L3_SM_P_20200501_R18290_002.tif")
-
+GDALinfo("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/BloomingtonIN.tif")
+GDALinfo
