@@ -2,7 +2,7 @@ library(raster)
 library(sp)
 library(rgdal)
 library(maptools)
-library(rgeos)
+library(rgeos) #Error in library(rgeos) : there is no package called ‘rgeos’ ?
 
 #Okay I guess I messed up the first time I tried to comment. Woops
 #also this is how you comment in stuff! It can be really helpful later on so you can make notes to yourself and to others
@@ -19,7 +19,8 @@ library(rgeos)
 WD <- "C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/BloomingtonIN.tif"
 setwd("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/")
 
-Btown <- raster("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/BloomingtonIN.tif") 
+Btown <- raster("Data/BloomingtonIN.tif") #calling it from the data folder
+#Btown <- raster("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/BloomingtonIN.tif") 
 Btown
 
 #Defining Min/Max values
@@ -35,6 +36,7 @@ cellStats(Btown, range)
 Btown@crs
 Btown@extent
 str(Btown)
+#
 BTown <- stack("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/BloomingtonIN.tif")
 BTown
 names(BTown) <- paste0("L", seq(1:nlayers(BTown)))
