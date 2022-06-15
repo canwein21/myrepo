@@ -14,7 +14,7 @@ library(rgeos)
 
 #This way, other people can run your code and you wont have to work from your local drive anymore
 #this can be really helpful if youre working from multiple computers
-#Trying to make sure R and GitHub are now connected?
+#KESONDRA & MALLORY - Can you see everything being pushed and pulled and committed? The only files currently in "myrepo" are the "BloomingtonIN.tif" and related files.
 
 WD <- "C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/BloomingtonIN.tif"
 setwd("C:/Users/User/OneDrive/Desktop/Research Assistant/BtownRaster/240789883/")
@@ -68,6 +68,11 @@ Btown[303,886]
 #Running the Btown[303,886] or any other number within the given dimensions of 350x900 gives me the following output: [1] NA. Is this because it's a single-layer raster?
 #Trying out more of the raster commands here
 raster(Btown)
+
+#Still trying to figure out where in the raster the soil moisture values are and how to extract them, Using the tutorial Kesondra sent me the other day to see if that helps at all.
+find_smap(id = "SPL3SMAP", dates = "2021-01-01", version = 4)
+#R isn't able to find the function "find_smap" but I can find it in the Help section of R. Moving on if I can.
+
 
 #Creating SPDF
 Btown <- SpatialPointsDataFrame(Btown[,4:3], proj4string = Btown@crs, Btown)
