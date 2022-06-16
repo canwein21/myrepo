@@ -75,6 +75,7 @@ raster(Btown)
 find_smap(id = "SPL3SMAP", dates = "2021-01-01", version = 4)
 #R isn't able to find the function "find_smap" but I can find it in the Help section of R. Moving on if I can.
 
+
 #Creating SPDF
 Btown <- SpatialPointsDataFrame(Btown[,4:3], proj4string = Btown@crs, Btown)
 sp <- SpatialPoints(v[,1:2, drop = FALSE], proj4string = crs(Btown))
