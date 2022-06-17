@@ -74,7 +74,7 @@ raster(Btown)
 #Still trying to figure out where in the raster the soil moisture values are and how to extract them, Using the tutorial Kesondra sent me the other day to see if that helps at all.
 find_smap(id = "SPL3SMAP", dates = "2021-01-01", version = 4)
 #R isn't able to find the function "find_smap" but I can find it in the Help section of R. Moving on if I can.
-
+extract("BloomingtonIN.tif", extent(0,800,0,300), method = 'simple', buffer = NULL, small = FALSE, cellnumbers = FALSE, fun = NULL, na.rm = TRUE, nl = 1, df = FALSE, factors = FALSE)
 
 #Creating SPDF
 Btown <- SpatialPointsDataFrame(Btown[,4:3], proj4string = Btown@crs, Btown)
