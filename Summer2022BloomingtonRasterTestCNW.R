@@ -78,6 +78,7 @@ extract("Btown", extent(0,900,0,350), method = 'simple', buffer = NULL, small = 
 #Getting the following errors: 1) "Error in h(simpleError(msg, call)) : error in evaluating the argument 'y' in selecting a method for function 'extract': insufficient number of elements (should be 4)"
 #2) Error in (function (classes, fdef, mtable)) : unable to find an inherited method for function 'extract' for signature '"character", "Extent"'
 extent(Btown(0,900,0,350))
+points(Btown)
 
 #Creating SPDF
 Btown <- SpatialPointsDataFrame(Btown[,4:3], proj4string = Btown@crs, Btown)
