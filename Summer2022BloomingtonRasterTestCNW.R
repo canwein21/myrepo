@@ -75,6 +75,8 @@ raster(Btown)
 find_smap(id = "SPL3SMAP", dates = "2021-01-01", version = 4)
 #R isn't able to find the function "find_smap" but I can find it in the Help section of R. Moving on if I can.
 extract("BloomingtonIN.tif", extent(0,800,0,300), method = 'simple', buffer = NULL, small = FALSE, cellnumbers = FALSE, fun = NULL, na.rm = TRUE, nl = 1, df = FALSE, factors = FALSE)
+#Getting the following errors: 1) "Error in h(simpleError(msg, call)) : error in evaluating the argument 'y' in selecting a method for function 'extract': insufficient number of elements (should be 4)"
+#2) Error in (function (classes, fdef, mtable)) : unable to find an inherited method for function 'extract' for signature '"character", "Extent"'
 
 #Creating SPDF
 Btown <- SpatialPointsDataFrame(Btown[,4:3], proj4string = Btown@crs, Btown)
