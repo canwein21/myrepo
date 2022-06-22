@@ -79,6 +79,8 @@ find_smap(id = "SPL3FTA", dates = "2021-01-01", version = 4)
 #R isn't finding the data products. It's saying "Error in validate_version(folder_names, id, version) : Invalid data version. [data product] does not exist at https://n5eil01u.ecs.nsidc.org/SMAP"
 extract("Btown", extent(0,900,0,350), method = 'simple', buffer = NULL, small = FALSE, cellnumbers = FALSE, fun = NULL, na.rm = TRUE, nl = 1, df = FALSE, factors = FALSE)
 #Getting the following error: "Error in (function(classes, fdef, mtable): unable to find an inherited method for function 'extract' for signature '"character", "Extent"'
+#Not sure how to get around this error - i've looked on GitHub and Stack Overflow, and have found documentation for the "Error in (function(classes, fdef, mtable)" portion of the error, but the rest seems to be non-existent. 
+#I do understand how rasters work, and using the tutorial data both Mallory and Kesondra have sent me, I've been able to get THAT to work, just not this specific one. I've re-downloaded the exact same file and get the same errors. 
 extent(Btown(0,900,0,350))
 points(Btown)
 
@@ -134,8 +136,6 @@ Bloomington_list <- list()
 for(i in 1:960){
   Bloomington_list[[i]] <- setValues(Bloomington, Bloomingtonnorm(ncell(Btown), mean = 100, sd = 50))
 }
-
-#Having driver issues somewhere around here. Trying to figure that out.
 
 hist(Btown, maxpixels = ncell(Btown), main = "Bloomington, IN distribution of values", col = "blue")
 
