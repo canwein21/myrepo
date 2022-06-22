@@ -4,6 +4,7 @@ library(rgdal)
 library(maptools)
 library(rgeos) 
 library(smapr)
+library(dplyr)
 
 #Okay I guess I messed up the first time I tried to comment. Woops
 #also this is how you comment in stuff! It can be really helpful later on so you can make notes to yourself and to others
