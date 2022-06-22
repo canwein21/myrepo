@@ -77,8 +77,7 @@ raster(Btown)
 find_smap(id = "SPL3FTA", dates = "2021-01-01", version = 4)
 #R isn't finding the data products. It's saying "Error in validate_version(folder_names, id, version) : Invalid data version. [data product] does not exist at https://n5eil01u.ecs.nsidc.org/SMAP"
 extract("Btown", extent(0,900,0,350), method = 'simple', buffer = NULL, small = FALSE, cellnumbers = FALSE, fun = NULL, na.rm = TRUE, nl = 1, df = FALSE, factors = FALSE)
-#Getting the following errors: 1) "Error in h(simpleError(msg, call)) : error in evaluating the argument 'y' in selecting a method for function 'extract': insufficient number of elements (should be 4)"
-#2) Error in (function (classes, fdef, mtable)) : unable to find an inherited method for function 'extract' for signature '"character", "Extent"'
+#Getting the following error: "Error in (function(classes, fdef, mtable): unable to find an inherited method for function 'extract' for signature '"character", "Extent"'
 extent(Btown(0,900,0,350))
 points(Btown)
 
