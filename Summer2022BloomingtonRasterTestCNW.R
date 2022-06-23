@@ -77,6 +77,7 @@ raster(Btown)
 #Still trying to figure out where in the raster the soil moisture values are and how to extract them, Using the tutorial Kesondra sent me the other day to see if that helps at all.
 find_smap(id = "SPL3FTA", dates = "2021-01-01", version = 4)
 #R isn't finding the data products. It's saying "Error in validate_version(folder_names, id, version) : Invalid data version. [data product] does not exist at https://n5eil01u.ecs.nsidc.org/SMAP"
+#As far as I can tell, these data versions do exist. I've tried restarting R and my computer, but get the same error.
 extract("Btown", extent(0,900,0,350), method = 'simple', buffer = NULL, small = FALSE, cellnumbers = FALSE, fun = NULL, na.rm = TRUE, nl = 1, df = FALSE, factors = FALSE)
 #Getting the following error: "Error in (function(classes, fdef, mtable): unable to find an inherited method for function 'extract' for signature '"character", "Extent"'
 #Not sure how to get around this error - i've looked on GitHub and Stack Overflow, and have found documentation for the "Error in (function(classes, fdef, mtable)" portion of the error, but the rest seems to be non-existent. 
